@@ -35,7 +35,8 @@ function* fetchDetails (action){
     try {
         // is this the right url??
         // getting back all movies, just want one with specific id 
-        const details = yield axios.get(`api/movie/`, action.payload);
+        // pretty sure this is right?!?!?!?!
+        const details = yield axios.get(`api/movie/${action.payload}`) ;
         console.log('getting specific movie', details.data)
         yield put({
             type: 'SET_CURRENT_MOVIE', 
@@ -71,7 +72,7 @@ const genres = (state = [], action) => {
 }
 
 // used to store current movie selected for details
-const currentMovie = (state = {}, action) => {
+const currentMovie = (state = [], action) => {
     switch(action.type){
         case 'SET_CURRENT_MOVIE':
             return action.payload
