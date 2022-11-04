@@ -1,34 +1,36 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 
 function MovieDetails () {
     const dispatch = useDispatch();
-
+    const params = useParams();
 
     const currentMovie = useSelector(store => store.currentMovie)
     console.log('the current movie is', currentMovie)
 
 
 
-    // useEffect(() => {
-    //         dispatch({
-    //             type: 'FETCH_DETAILS',
-    //             payload: currentMovie[0].id         // how do i give it id from here? 
-    //         })
+    useEffect(() => {
+            dispatch({
+                type: 'FETCH_DETAILS',
+                payload: params.id       // how do i give it id from here? 
+            })
         
-    // }, [])
+    }, [])
 
-    
+    // {currentMovie.length > 0 && currentMovie.title}
     
     // why isn't this rendering??
     return (
         <>
-            <h3>movie details</h3>
-                 {currentMovie[0].title}
-                {currentMovie[0].description}<br></br>
-                <img src = {currentMovie[0].poster}
+        {currentMovie && currentMovie.tiel}
+            <h3>movie details </h3> 
+                {currentMovie.title}
+                {currentMovie && currentMovie.description} <br></br>
+                <img src = {currentMovie.poster}
                  /> 
           
         </>

@@ -26,7 +26,8 @@ console.log('am i getting the id?', req.params)
   pool.query(query, movieId)
   
   .then((dbRes) => {
-    res.send(dbRes.rows)
+    res.send(dbRes.rows[0])
+    console.log('db res is', dbRes.rows[0])
   })
   .catch((err) => {
     console.log('error getting specific movie from db', err)
