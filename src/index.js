@@ -10,10 +10,11 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-
+// import { useParams } from 'react-router-dom'
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies)
+    yield takeEvery('FETCH_DETAILS', fetchDetails)
 }
 
 function* fetchAllMovies() {
@@ -27,6 +28,16 @@ function* fetchAllMovies() {
         console.log('get all error');
     }
         
+}
+
+function* fetchDetails(action){
+    // try{
+    //     const details = yield axios.get(`api/movie/:id`);
+    //     console.log('getting specific movie', details.data)
+    //     yield put({ type: 'SET_CURRENT_MOVIE', payload: details.data })
+    // } catch {
+    //     console.log('error getting details')
+    // }
 }
 
 // Create sagaMiddleware
