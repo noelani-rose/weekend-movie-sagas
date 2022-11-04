@@ -10,7 +10,6 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-// import { useParams } from 'react-router-dom'
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies)
@@ -30,14 +29,22 @@ function* fetchAllMovies() {
         
 }
 
-function* fetchDetails(action){
-    // try{
-    //     const details = yield axios.get(`api/movie/:id`);
-    //     console.log('getting specific movie', details.data)
-    //     yield put({ type: 'SET_CURRENT_MOVIE', payload: details.data })
-    // } catch {
-    //     console.log('error getting details')
-    // }
+// do i want to pass the id of movie clicked as an action?? 
+function* fetchDetails (action){
+    console.log('action is', action.payload)
+    try {
+        // is this the right url??
+        // getting back all movies, just want one with specific id 
+        const details = yield axios.get(`api/movie/`, action.payload);
+        console.log('getting specific movie', details.data)
+        yield put({
+            type: 'SET_CURRENT_MOVIE', 
+            payload: details.data 
+        })
+    } 
+    catch {
+        console.log('error getting details')
+    }
 }
 
 // Create sagaMiddleware

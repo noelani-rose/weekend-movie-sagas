@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import MovieListItems from '../MoveListItems/MovieListItems';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
 function MovieList() {

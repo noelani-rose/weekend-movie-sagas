@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 function MovieDetails () {
     const dispatch = useDispatch();
 
-    const currentMovie = useSelector(store => store.currentMovie)
-    console.log('the current movie is', currentMovie)
+    // const currentMovie = useSelector(store => store.currentMovie)
+    // console.log('the current movie is', currentMovie)
 
 
 
