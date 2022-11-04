@@ -1,0 +1,9 @@
+1. 
+    I want FETCH_DETAILS to be dispatched on page load when
+I get to the details page, but how do I send the ID as a payload from there
+to saga which calls fetchDetails?
+
+2. 
+    Am I rendering this correctly, with an index of 0? should I map through? 
+Does that actually matter? Or am I setting inital state wrong? 
+

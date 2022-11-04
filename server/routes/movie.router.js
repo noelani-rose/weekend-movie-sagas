@@ -16,6 +16,24 @@ router.get('/', (req, res) => {
 
 });
 
+
+// do i need another query to /:id???
+router.get('/:id', (req, res) => {
+console.log('am i getting the id?', req.params)
+  let movieId = [req.params.id]
+  const query = `SELECT * FROM movies WHERE id = $1`
+
+  pool.query(query, movieId)
+  
+  .then((dbRes) => {
+    res.send(dbRes.rows)
+  })
+  .catch((err) => {
+    console.log('error getting specific movie from db', err)
+  })
+})
+
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

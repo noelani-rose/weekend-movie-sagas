@@ -10,10 +10,10 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies)
+    yield takeEvery('FETCH_DETAILS', fetchDetails)
 }
 
 function* fetchAllMovies() {
@@ -27,6 +27,25 @@ function* fetchAllMovies() {
         console.log('get all error');
     }
         
+}
+
+// do i want to pass the id of movie clicked as an action?? 
+function* fetchDetails (action){
+    console.log('action is', action.payload)
+    try {
+        // is this the right url??
+        // getting back all movies, just want one with specific id 
+        // pretty sure this is right?!?!?!?!
+        const details = yield axios.get(`api/movie/${action.payload}`) ;
+        console.log('getting specific movie', details.data)
+        yield put({
+            type: 'SET_CURRENT_MOVIE', 
+            payload: details.data 
+        })
+    } 
+    catch {
+        console.log('error getting details')
+    }
 }
 
 // Create sagaMiddleware
@@ -52,11 +71,22 @@ const genres = (state = [], action) => {
     }
 }
 
+// used to store current movie selected for details
+const currentMovie = (state = [], action) => {
+    switch(action.type){
+        case 'SET_CURRENT_MOVIE':
+            return action.payload
+    }
+    return state
+}
+
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        currentMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
