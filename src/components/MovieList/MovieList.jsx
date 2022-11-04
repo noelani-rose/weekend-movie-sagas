@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
+import MovieListItems from '../MoveListItems/MovieListItems';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 
 function MovieList() {
 
@@ -17,12 +20,17 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
-                        </div>
+                        // <div key={movie.id} >
+                        //     <h3>{movie.title}</h3>
+                        //     <img src={movie.poster} alt={movie.title}/>
+                        // <Link to = "/items">
+                            <MovieListItems movie = {movie}/>
+                        // </Link>
+                        // </div>
+                       
                     );
                 })}
+
             </section>
         </main>
 

@@ -1,0 +1,17 @@
+import {Link, useHistory} from 'react-router-dom'
+
+
+function MovieListItems ({movie}) {
+    return (
+        <>
+        <Link to = {`/item`}>
+            <div key={movie.id} >      
+                <h3>{movie.title}</h3>
+                <img src={movie.poster} alt={movie.title}/>
+            </div>
+         </Link>
+        </>
+    )
+}
+
+export default MovieListItems;
