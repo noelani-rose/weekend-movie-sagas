@@ -19,7 +19,7 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <MovieListItems movie = {movie}/>                       
+                        <MovieListItems key = {movie.id} movie = {movie}/>                       
                     );
                 })}
 
