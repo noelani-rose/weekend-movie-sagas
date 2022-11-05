@@ -31,13 +31,12 @@ function MovieDetails () {
     // why isn't this rendering??
     return (
         <>
-        {currentMovie && currentMovie.tiel}
-            <h3>movie details </h3> 
-                <div className='movieTitle'>{currentMovie.title}</div>
-                <div className=''>{currentMovie.description}</div> <br></br>
+            <h3>Movie Details </h3> 
+                <div className='movieTitle' >{currentMovie.title}</div>
+                <div className='movieDescription'>{currentMovie.description}</div> <br></br>
                 <img src = {currentMovie.poster}/> 
                 {movieGenre.map(genre => (
-                    <div>{genre.name}</div>
+                    <div className='movieGenre' key = {genre.name}>{genre.name}</div>
                 ))}
           
         </>
