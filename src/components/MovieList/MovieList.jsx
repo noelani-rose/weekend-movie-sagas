@@ -7,6 +7,7 @@ import MovieListItems from '../MoveListItems/MovieListItems';
 function MovieList() {
 
     const dispatch = useDispatch();
+    // grabbing movies from movies reducer 
     const movies = useSelector(store => store.movies);
 
     useEffect(() => {
@@ -15,7 +16,6 @@ function MovieList() {
 
     return (
         <main>
-            <h1>MovieList</h1>
             <section className="movies">
                 {movies.map(movie => {
                     return (

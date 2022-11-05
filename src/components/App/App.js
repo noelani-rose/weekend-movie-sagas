@@ -6,9 +6,13 @@ import MovieDetails from '../MovieDetails/MovieDetails';
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <header className='header'>
+        <h1>Movies</h1>
+      </header>
+
       <Router>        
         <Route path="/" exact>
+          <p>Select movie for details</p>
           <MovieList />
         </Route>
         
@@ -16,7 +20,7 @@ function App() {
           <Route exact path = "/details/:id">
             <MovieDetails />
           </Route>
-        {/* Add Movie page */}
+
       </Router>
     </div>
   );

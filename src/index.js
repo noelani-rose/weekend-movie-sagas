@@ -10,6 +10,9 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put, take } from 'redux-saga/effects';
 import axios from 'axios';
+
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies)
@@ -17,27 +20,27 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchGenres)
 }
 
+// function called when dispatch FETCH_MOVIES is caught
+// makes an axios GET request to server and retrieves all movies
 function* fetchAllMovies() {
-    // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
+        // when GET is successful, dispatch SET_MOVIES with a payload
+        // of all movies recieved from movies database
         yield put({ type: 'SET_MOVIES', payload: movies.data });
-
     } catch {
         console.log('get all error');
     }    
 }
 
-// do i want to pass the id of movie clicked as an action?? 
+// function called when dispatch FETCH_DETAILS is caught
+//  makes an axios GET request to server with specific ID 
 function* fetchDetails (action){
     console.log('action is', action.payload)
     try {
-        // is this the right url??
-        // getting back all movies, just want one with specific id 
-        // pretty sure this is right?!?!?!?!
-        const details = yield axios.get(`api/movie/${action.payload}`) ;
-        console.log('getting specific movie', details.data)
+        const details = yield axios.get(`api/movie/${action.payload}`);
+        // when GET is successful, dispatch SET_CURRENT_MOVIE with a payload
+        // of all details from movies database with that specific ID
         yield put({
             type: 'SET_CURRENT_MOVIE', 
             payload: details.data 
@@ -48,11 +51,14 @@ function* fetchDetails (action){
     }
 }
 
+// function called when dispatch FETCH_GENRES is caught 
+// makes axios GET request to server to retrieve genres for movie with specific ID 
 function* fetchGenres (action) {
     console.log('in fetchGenres function')
     try{
         const genres = yield axios.get(`/api/genre/${action.payload}`);
-
+        // when GET is successful, dispatch SET_GENRE with a payload
+        // of genres from genre database with that specific movie ID 
         yield put({
             type: 'SET_GENRE',
             payload: genres.data
@@ -63,11 +69,10 @@ function* fetchGenres (action) {
     }
 }
 
-
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
+// storing all movies from movies database
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -77,7 +82,16 @@ const movies = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// storing current movie info from movies database with specific ID 
+const currentMovie = (state = {}, action) => {
+    switch(action.type){
+        case 'SET_CURRENT_MOVIE':
+            return action.payload
+    }
+    return state
+}
+
+// storing current movie's genres from the genre database
 const genres = (state = [], action) => {
     console.log('what is the genre', action.payload)
     switch (action.type) {
@@ -87,16 +101,6 @@ const genres = (state = [], action) => {
             return state;
     }
 }
-
-// used to store current movie selected for details
-const currentMovie = (state = {}, action) => {
-    switch(action.type){
-        case 'SET_CURRENT_MOVIE':
-            return action.payload
-    }
-    return state
-}
-
 
 // Create one store that all components can use
 const storeInstance = createStore(
