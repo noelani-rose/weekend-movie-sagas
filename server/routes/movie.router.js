@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 });
 
 
-// do i need another query to /:id???
 router.get('/:id', (req, res) => {
 console.log('am i getting the id?', req.params)
   let movieId = [req.params.id]
@@ -27,7 +26,7 @@ console.log('am i getting the id?', req.params)
   
   .then((dbRes) => {
     res.send(dbRes.rows[0])
-    console.log('db res is', dbRes.rows[0])
+    // dbRes is an array with one object, so just need to send dbRes.rows[0] 
   })
   .catch((err) => {
     console.log('error getting specific movie from db', err)

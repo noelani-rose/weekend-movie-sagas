@@ -18,6 +18,10 @@ function MovieDetails () {
                 type: 'FETCH_DETAILS',
                 payload: params.id       // how do i give it id from here? 
             })
+            dispatch({
+                type: 'FETCH_GENRES',
+                payload: params.id
+            })
         
     }, [])
 

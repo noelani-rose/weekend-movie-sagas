@@ -8,12 +8,13 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, take } from 'redux-saga/effects';
 import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies)
     yield takeEvery('FETCH_DETAILS', fetchDetails)
+    yield takeEvery('FETCH_GENRES', fetchGenres)
 }
 
 function* fetchAllMovies() {
@@ -25,8 +26,7 @@ function* fetchAllMovies() {
 
     } catch {
         console.log('get all error');
-    }
-        
+    }    
 }
 
 // do i want to pass the id of movie clicked as an action?? 
@@ -48,6 +48,22 @@ function* fetchDetails (action){
     }
 }
 
+function* fetchGenres () {
+    console.log('in fetchGenres function')
+    try{
+        const genres = yield axios.get(`/api/genre/${action.payload}`);
+
+        yield put({
+            type: 'SET_GENRE',
+            payload: genres.data
+        })
+    }
+    catch {
+        console.log('error getting genres')
+    }
+}
+
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -63,8 +79,9 @@ const movies = (state = [], action) => {
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
+    console.log('what is the genre', action.payload)
     switch (action.type) {
-        case 'SET_GENRES':
+        case 'SET_GENRE':
             return action.payload;
         default:
             return state;
