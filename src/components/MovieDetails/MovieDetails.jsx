@@ -32,13 +32,19 @@ function MovieDetails () {
     return (
         <>
             <h3>Movie Details </h3> 
-                <div className='movieTitle' >{currentMovie.title}</div>
-                <div className='movieDescription'>{currentMovie.description}</div> <br></br>
-                <img src = {currentMovie.poster}/> 
-                {movieGenre.map(genre => (
-                    <div className='movieGenre' key = {genre.name}>{genre.name}</div>
-                ))}
-          
+                <div className='movieTitle' >
+                    <h2>{currentMovie.title}</h2>
+                </div>
+                <div className='movieGenre'>
+                    {movieGenre.map(genre => (
+                        <div key = {genre.name}>{genre.name}</div>
+                    ))}
+                </div>
+                <img src = {currentMovie.poster}/> <br></br>
+                <div className='movieDescription'>
+                    {currentMovie.description}
+                </div>
+
         </>
     )
 }
