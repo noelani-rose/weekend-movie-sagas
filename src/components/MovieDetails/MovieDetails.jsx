@@ -9,6 +9,7 @@ function MovieDetails () {
     const params = useParams();
 
     const currentMovie = useSelector(store => store.currentMovie)
+    const movieGenre = useSelector(store => store.genres)
     console.log('the current movie is', currentMovie)
 
 
@@ -23,7 +24,7 @@ function MovieDetails () {
                 payload: params.id
             })
         
-    }, [])
+    }, [params.id])
 
     // {currentMovie.length > 0 && currentMovie.title}
     
@@ -32,10 +33,12 @@ function MovieDetails () {
         <>
         {currentMovie && currentMovie.tiel}
             <h3>movie details </h3> 
-                {currentMovie.title}
-                {currentMovie && currentMovie.description} <br></br>
-                <img src = {currentMovie.poster}
-                 /> 
+                <div className='movieTitle'>{currentMovie.title}</div>
+                <div className=''>{currentMovie.description}</div> <br></br>
+                <img src = {currentMovie.poster}/> 
+                {movieGenre.map(genre => (
+                    <div>{genre.name}</div>
+                ))}
           
         </>
     )

@@ -7,7 +7,6 @@ router.get('/:id', (req, res) => {
   let movieId = [req.params.id]
   const sqlText = `
   SELECT
-  "movies"."title",
   "genres"."name"
   FROM "genres"
   JOIN "movies_genres" ON "genres"."id" = "movies_genres"."genre_id"
@@ -18,8 +17,8 @@ router.get('/:id', (req, res) => {
   pool.query(sqlText, movieId)
 
   .then((dbRes) => {
-    res.send(dbRes.rows[0])
-    console.log('db res from movie with genre is', dbRes.rows[0])
+    res.send(dbRes.rows)
+    console.log('db res from movie with genre is', dbRes.rows)
   })
   .catch((err) => {
     console.log('error getting genres for movie with id', err)

@@ -48,7 +48,7 @@ function* fetchDetails (action){
     }
 }
 
-function* fetchGenres () {
+function* fetchGenres (action) {
     console.log('in fetchGenres function')
     try{
         const genres = yield axios.get(`/api/genre/${action.payload}`);
