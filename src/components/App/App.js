@@ -11,12 +11,12 @@ function App() {
       </header>
 
       <Router>        
+        
         <Route path="/" exact>
           <p>Select movie for details</p>
           <MovieList />
         </Route>
         
-        {/* Details page */}
           <Route exact path = "/details/:id">
             <MovieDetails />
           </Route>

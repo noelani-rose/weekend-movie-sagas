@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+
+import Button from '@mui/material/Button';
 
 
 
 function MovieDetails () {
     const dispatch = useDispatch();
+    const history = useHistory();
     const params = useParams();
 
     const currentMovie = useSelector(store => store.currentMovie)
@@ -17,7 +20,7 @@ function MovieDetails () {
     useEffect(() => {
             dispatch({
                 type: 'FETCH_DETAILS',
-                payload: params.id       // how do i give it id from here? 
+                payload: params.id    
             })
             dispatch({
                 type: 'FETCH_GENRES',
@@ -25,10 +28,8 @@ function MovieDetails () {
             })
         
     }, [params.id])
-
-    // {currentMovie.length > 0 && currentMovie.title}
     
-    // why isn't this rendering??
+
     return (
         <>
             <h3>Movie Details </h3> 
@@ -44,6 +45,15 @@ function MovieDetails () {
                 <div className='movieDescription'>
                     {currentMovie.description}
                 </div>
+                <br></br>
+                <Button 
+                sx = {{marginTop: "1em"}}
+                variant = "outlined"
+                className = "backButton"
+                onClick = {() => {history.push('/')}}>
+                    Back to Movie List
+                </Button>
+
 
         </>
     )
