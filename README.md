@@ -1,9 +1,29 @@
-# Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+# Noelani's Saga Movie List
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This app allows a user to choose a movie from the provided movie list and view the details of that movie including the title, description, poster, and genres. Movie information is being grabbed from respective databases. User can navigate back to the movie list page when 'back to movie list' button is clicked. 
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+## Installation
+
+1. npm install
+2. createdb saga_movies_weekend
+    psql -d saga_movies_weekend -f database.sql
+3. in seperate termianls, npm run server and npm run client
+
+## Usage
+
+1. Choose movie to view details
+2. Movie details (title, description, poster, and genres) will load
+3. Click 'back to movie list' button to go back to homepage 
+
+## Built With 
+
+1. Node.js
+2. JavaScript
+3. React
+4. Redux-saga
+5. SQL 
+6. HTML
+7. CSS 
+
